@@ -36,21 +36,8 @@ table, th, td {
   border: 2px solid grey;
 }
 */
-
-figure.asteroids {
-  width: 320px;
-  margin: auto;
+h2 {
+  text-align: left;
 }
 
-figure.asteroids > img {
-  width: 300px;
-}
-
-figure.asteroids > figcaption {
-  text-align: center;
-}
-
-p {
-  font-size: 12px;
-}
 

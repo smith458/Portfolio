@@ -1,0 +1,12 @@
+figure {
+  width: 320px;
+  margin: auto;
+}
+
+figure > img {
+  width: 300px;
+}
+
+figure > figcaption {
+  text-align: center;
+}

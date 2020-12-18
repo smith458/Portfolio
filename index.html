@@ -2,98 +2,29 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-    integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
-    integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
-    integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
     crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-    integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
 <body>
   <h1>Projects</h1>
-  <h2>Kalman Filter</h2>
-  <h3>Overview</h3>
-  <p>
-    Asteroids was a two-part project for Artificial Intelligence for Robotics. The purpose was to demonstrate the usage
-    of a Kalman Filter. The goal of the first part was to track a group of asteroids (moving with a constant
-    acceleration) on a 2-D map and predict their next location. The goal of the second part was to use those predictions
-    to navigate a spaceship through the asteroid field to a goal location.
-  </p>
-  <h3>Part 1</h3>
-  <p>
-    If the first part, the testing suite would give a noisy x and y location of all of the asteroids on the map. Then
-    the code would have to process those values and return an estimate of where the asteroids will be at the next time
-    step. The test was passed once 90% of the estimates were considered accurate. The margin to be an accurate estimate
-    was pre-set by the testing suite.
-  </p>
-  <figure class="asteroids">
-    <img class="asteroids" src="Asteroids/1 Asteroids Estimation Blank.png">
-    <figcaption>Image of asteroid field.</figcaption>
-  </figure>
-  <p>
-    The x and y measurements were used to develop and update a belief of the location of each asteroid. The Kalman
-    Filter uses a gaussian to represent the state. The mean of the gaussian represents the estimate of where the
-    asteroid is. The variance of the gaussian represents the certainty of that belief. The Kalman Filter is effective in
-    solving this problem because it can process each of those measurements and over time see through the noise to learn
-    a more accurate estimation of the true position of the asteroid. It can also use the position measurements to infer
-    an estimation of the velocity and acceleration of the asteroids.
-  </p>
-  <figure class="asteroids">
-    <img class="asteroids" src="Asteroids/2 Asteroid Estimation.gif" />
-    <figcaption>Gif of location estimates.</figcaption>
-  </figure>
-  <p>
-    The gif shows the location estimates from the Kalman Filter converging as the filter develops. Green dots are
-    correct estimates within a tolerance. Red dots are estimates outside of that tolerance. The gif ends when 90% of the
-    estimates are
-  </p>
-  <h3>Part 2</h3>
-  <p>
-    In the second part, the testing suite would give noisy x and y locations of the asteroid, like in part 1, but
-    instead of returning the estimates for the positions of the asteroids, the code would need to return an action for
-    the space ship. It always started in the middle at the bottom of the map and needed to get to the top of the map
-    without crashing into any asteroids.
-  </p>
-  <figure class="asteroids">
-    <img class="asteroids" src="Asteroids/3 Asteroid Navigation Blank.png" />
-    <figcaption>Image of ship and target</figcaption>
-  </figure>
-  <p>
-    The kalman filter was used again to track and predict the locations of all of the asteroids. The estimated locations
-    were then used to decide the best action for the ship to get it to the goal. The ship could turn left, turn right,
-    or continue straight, and it could speed up, slow down, or maintain the same speed. This leaves 9 different action
-    combinations and 9 different states that the ship could be in at the next time step.
-  </p>
-  <p>
-    Each of these future states were given a score based on 3 metrics. The closer the position was to the top of the map
-    (the goal location) the more points the position got. Only asteroids that were already on the map were being
-    tracked. This means that it was possible that a new untracked asteroid could appear on the map near the edges, so
-    being close to the edges was dangerous for the ship. The second metric protected against this by giving points if
-    the position was not near the edge. The third metric looked at all the asteroids within an area around the ship. The
-    ship lost points for each asteroid in the area. The number of points lost was proportional to the distance of each
-    asteroid squared. This really punished positions that were close to asteroids and incentivised keeping a good
-    distance from any asteroids. Coefficients for the three metrics were then adjusted to ensure that the ship kept
-    moving forward while still staying centered and avoiding asteroids.
-  </p>
-  <figure class="asteroids">
-    <img class="asteroids" src="Asteroids/4 Asteroid Navigation.gif" />
-    <figcaption>Gif of ship navigating asteroid field</figcaption>
-  </figure>
-
-
-  <div class="wrapper">
-    <div class="pad" style="width:50%">
+  <a href="asteroids.html">Kalman Filter</h2>
+    <div class="wrapper">
+      <div class="pad" style="width:50%">
+      </div>
+      <div class="pad" style="width:50%">
+      </div>
     </div>
-    <div class="pad" style="width:50%">
-    </div>
-  </div>
 </body>
 
 </html>

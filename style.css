@@ -1,0 +1,42 @@
+body { 
+  margin: 25px;
+  padding: 25px;
+}
+
+h1 {
+  font-size: 30px;
+}
+h1, h2, h3, h4, h5 {
+  text-align: center;
+}
+
+div {
+  margin:0px;
+  padding:0px;
+  border-style:hidden;
+}
+
+div.pad {
+  margin:20px;
+  padding: 20px;
+}
+
+div.outline {
+  border: 2px solid black;
+}
+
+div.wrapper {
+  display:flex;
+}
+
+/*
+table, th, td {
+  font-size: 12px;
+  border: 2px solid grey;
+}
+*/
+
+p {
+  font-size: 12px;
+}
+
